@@ -1,7 +1,7 @@
 <h1 align="center">
   <img src="assets/thumbnail.png" alt="BaekjoonHub - Automatically sync your code to GitHub." width="400">
   <br>
-  BaekjoonHub - Automatically sync your code to GitHub.
+  SSAFYHub - Automatically sync your code to GitHub for SSAFY 서울 8반.
   <br>
   <br>
 </h1>
