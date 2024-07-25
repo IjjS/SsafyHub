@@ -152,6 +152,10 @@ async function getHook() {
   return await getObjectFromLocalStorage('BaekjoonHub_hook');
 }
 
+async function getUser() {
+  return await getObjectFromLocalStorage('SsafyHub_user');
+}
+
 /** welcome.html 의 분기 처리 dis_option에서 설정된 boolean 값을 반환합니다. */
 async function getOrgOption() {
   try {

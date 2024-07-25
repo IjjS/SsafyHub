@@ -125,13 +125,15 @@ const linkStatusCode = (status, name) => {
     2. Link Hook to it (chrome Storage).
 */
 const linkRepo = (token, name) => {
-  const AUTHENTICATION_URL = `https://api.github.com/repos/${name}`;
+  const repo = `${name.split("/")[0]}/${name.split("/")[1]}`;
+  const user = name.split("/")[2];
+  const AUTHENTICATION_URL = `https://api.github.com/repos/${repo}`;
 
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('readystatechange', function() {
     if (xhr.readyState === 4) {
       const res = JSON.parse(xhr.responseText);
-      const bool = linkStatusCode(xhr.status, name);
+      const bool = linkStatusCode(xhr.status, repo);
       if (xhr.status === 200) {
         // BUG FIX
         if (!bool) {
@@ -144,6 +146,10 @@ const linkRepo = (token, name) => {
           chrome.storage.local.set({ BaekjoonHub_hook: null }, () => {
             console.log('Defaulted repo hook to NONE');
           });
+
+          chrome.storage.local.set({ SsafyHub_user: null }, () => {
+            console.log(`${user} not available`);
+          })
 
           /* Hide accordingly */
           document.getElementById('hook_mode').style.display = 'inherit';
@@ -171,6 +177,9 @@ const linkRepo = (token, name) => {
               const { stats } = psolved;
             });
           });
+          chrome.storage.local.set({ SsafyHub_user: user }, () => {
+            console.log('Successfully set new user');
+          })
           /* Hide accordingly */
           document.getElementById('hook_mode').style.display = 'none';
           document.getElementById('commit_mode').style.display = 'inherit';
