@@ -6,6 +6,14 @@ const repositoryName = () => {
   return $('#name').val().trim();
 };
 
+const orgName = () => {
+  const season = $('#season').val().trim();
+  const region = $('#region').val().trim();
+  const classroom = $('#classroom').val().trim();
+
+  return `ssafy-${season}-${region}-${classroom}`;
+}
+
 /* Status codes for creating of repo */
 
 const statusCode = (res, status, name) => {
@@ -125,7 +133,8 @@ const linkStatusCode = (status, name) => {
     2. Link Hook to it (chrome Storage).
 */
 const linkRepo = (token, name) => {
-  const repo = `${name.split("/")[0]}/${name.split("/")[1]}`;
+  const org = orgName();
+  const repo = `${org}/${name.split("/")[1]}`;
   const user = name.split("/")[2];
   const AUTHENTICATION_URL = `https://api.github.com/repos/${repo}`;
 
@@ -155,11 +164,12 @@ const linkRepo = (token, name) => {
           document.getElementById('hook_mode').style.display = 'inherit';
           document.getElementById('commit_mode').style.display = 'none';
         } else {
+          chrome.storage.local.set({BaekjoonHub_username: org});
           /* Change mode type to commit */
           /* Save repo url to chrome storage */
           chrome.storage.local.set({ mode_type: 'commit', repo: res.html_url }, () => {
             $('#error').hide();
-            $('#success').html(`Successfully linked <a target="blank" href="${res.html_url}">${name}</a> to BaekjoonHub. Start <a href="https://www.acmicpc.net/">BOJ</a> now!`);
+            $('#success').html(`Successfully linked <a target="blank" href="${res.html_url}">${repo}/${user}</a> to BaekjoonHub. Start <a href="https://www.acmicpc.net/">BOJ</a> now!`);
             $('#success').show();
             $('#unlink').show();
           });
@@ -216,9 +226,33 @@ const unlinkRepo = () => {
 
 /* Check for value of select tag, Get Started disabled by default */
 
-$('#type').on('change', function() {
+$('#season').on('change', function() {
+  const region = $('#region').val();
+  const classroom = $('#classroom').val();
   const valueSelected = this.value;
-  if (valueSelected) {
+  if (region && classroom && valueSelected) {
+    $('#hook_button').attr('disabled', false);
+  } else {
+    $('#hook_button').attr('disabled', true);
+  }
+});
+
+$('#region').on('change', function() {
+  const season = $('#season').val();
+  const classroom = $('#classroom').val();
+  const valueSelected = this.value;
+  if (season && classroom && valueSelected) {
+    $('#hook_button').attr('disabled', false);
+  } else {
+    $('#hook_button').attr('disabled', true);
+  }
+});
+
+$('#classroom').on('change', function() {
+  const region = $('#region').val();
+  const season = $('#season').val();
+  const valueSelected = this.value;
+  if (region && season && valueSelected) {
     $('#hook_button').attr('disabled', false);
   } else {
     $('#hook_button').attr('disabled', true);

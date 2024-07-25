@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
   <link rel="stylesheet" href="css/welcome.css" />
   <script src="/library/jquery-3.3.1.min.js"></script>
 
@@ -30,8 +31,6 @@
       <div class="ui form">
         <div class="field">
           <select id="type">
-            <option value="">Pick an Option</option>
-            <option value="new">Create a new Private Repository</option>
             <option value="link">Link an Existing Repository</option>
           </select>
         </div>
@@ -45,13 +44,34 @@
             <option value="language">Organize by Language</option>
           </select>
         </div>
+
+        <div class="field">
+          <select id="season">
+            <option value="">기수 선택</option>
+            <option value="12">열정 2배! 12기</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <select id="region">
+            <option value="">지역 선택</option>
+            <option value="seoul">서울</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <select id="classroom">
+            <option value="">반 선택</option>
+            <option value="8">8반</option>
+          </select>
+        </div>
       </div>
     </div>
 
     <div class="six wide column">
       <div class="ui form">
         <div class="field">
-          <input autocomplete="off" id="name" placeholder="Repository Name" type="text" />
+          <input autocomplete="off" id="name" placeholder="Repository Name/사용자 이름" type="text" />
         </div>
       </div>
     </div>
