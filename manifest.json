@@ -3,8 +3,8 @@
   "name": "싸피허브(SsafyHub)",
   "description": "Automatically integrate your BOJ submissions to GitHub for custom organizations of SSAFY students",
   "homepage_url": "https://github.com/IjjS/SsafyHub",
-  "version": "1.2.3",
-  "author": "flaxinger",
+  "version": "1.2.4",
+  "author": "IjjS",
   "action": {
     "default_icon": "assets/thumbnail.png",
     "default_popup": "popup.html"
