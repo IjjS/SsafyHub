@@ -13,8 +13,8 @@ $('#authenticate').on('click', () => {
 $('#welcome_URL').attr('href', `chrome-extension://${chrome.runtime.id}/welcome.html`);
 $('#hook_URL').attr('href', `chrome-extension://${chrome.runtime.id}/welcome.html`);
 
-chrome.storage.local.get('BaekjoonHub_token', (data) => {
-  const token = data.BaekjoonHub_token;
+chrome.storage.local.get('SsafyHub_token', (data) => {
+  const token = data.SsafyHub_token;
   if (token === null || token === undefined) {
     action = true;
     $('#auth_mode').show();
@@ -31,10 +31,10 @@ chrome.storage.local.get('BaekjoonHub_token', (data) => {
             if (data2 && data2.mode_type === 'commit') {
               $('#commit_mode').show();
               /* Get problem stats and repo link */
-              chrome.storage.local.get(['stats', 'BaekjoonHub_hook'], (data3) => {
-                const BaekjoonHubHook = data3.BaekjoonHub_hook;
-                if (BaekjoonHubHook) {
-                  $('#repo_url').html(`Your Repo: <a target="blank" style="color: cadetblue !important;" href="https://github.com/${BaekjoonHubHook}">${BaekjoonHubHook}</a>`);
+              chrome.storage.local.get(['stats', 'SsafyHub_hook'], (data3) => {
+                const SsafyHubHook = data3.SsafyHub_hook;
+                if (SsafyHubHook) {
+                  $('#repo_url').html(`Your Repo: <a target="blank" style="color: cadetblue !important;" href="https://github.com/${SsafyHubHook}">${SsafyHubHook}</a>`);
                 }
               });
             } else {
@@ -44,7 +44,7 @@ chrome.storage.local.get('BaekjoonHub_token', (data) => {
         } else if (xhr.status === 401) {
           // bad oAuth
           // reset token and redirect to authorization process again!
-          chrome.storage.local.set({ BaekjoonHub_token: null }, () => {
+          chrome.storage.local.set({ SsafyHub_token: null }, () => {
             console.log('BAD oAuth!!! Redirecting back to oAuth process');
             action = true;
             $('#auth_mode').show();

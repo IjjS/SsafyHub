@@ -8,7 +8,7 @@ const localAuth = {
    * Initialize
    */
   init() {
-    this.KEY = 'BaekjoonHub_token';
+    this.KEY = 'SsafyHub_token';
     this.ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token';
     this.AUTHORIZATION_URL = 'https://github.com/login/oauth/authorize';
     this.CLIENT_ID = '975f8d5cf6686dd1faed';
@@ -101,8 +101,8 @@ const link = window.location.href;
 
 /* Check for open pipe */
 if (window.location.host === 'github.com') {
-  chrome.storage.local.get('pipe_baekjoonhub', (data) => {
-    if (data && data.pipe_baekjoonhub) {
+  chrome.storage.local.get('pipe_ssafyhub', (data) => {
+    if (data && data.pipe_ssafyhub) {
       localAuth.parseAccessCode(link);
     }
   });

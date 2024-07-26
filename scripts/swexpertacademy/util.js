@@ -2,14 +2,14 @@
  * 로딩 버튼 추가
  */
 function startUpload() {
-  let elem = document.getElementById('BaekjoonHub_progress_anchor_element');
+  let elem = document.getElementById('SsafyHub_progress_anchor_element');
   if (elem !== undefined) {
     elem = document.createElement('span');
-    elem.id = 'BaekjoonHub_progress_anchor_element';
+    elem.id = 'SsafyHub_progress_anchor_element';
     // elem.className = 'runcode-wrapper__8rXm';
     // elem.style = 'margin-left: 10px;padding-top: 0px;';
   }
-  elem.innerHTML = `<div id="BaekjoonHub_progress_elem" class="BaekjoonHub_progress"></div>`;
+  elem.innerHTML = `<div id="SsafyHub_progress_elem" class="SsafyHub_progress"></div>`;
   const target = document.querySelector('div.box-list > div.box-list-inner > div.right_answer > span.btn_right');
   if (!isNull(target)) {
     target.prepend(elem);
@@ -18,10 +18,10 @@ function startUpload() {
   startUploadCountDown();
 }
 function makeSubmitButton(link) {
-  let elem = document.getElementById('BaekjoonHub_submit_button_element');
+  let elem = document.getElementById('SsafyHub_submit_button_element');
   if (elem !== undefined) {
     elem = document.createElement('a');
-    elem.id = 'BaekjoonHub_submit_button_element';
+    elem.id = 'SsafyHub_submit_button_element';
     elem.className = 'btn_grey3 md btn';
     elem.style = 'cursor:pointer';
     elem.href = link;
@@ -42,7 +42,7 @@ function makeSubmitButton(link) {
  */
 function markUploadedCSS(branches, directory) {
   uploadState.uploading = false;
-  const elem = document.getElementById('BaekjoonHub_progress_elem');
+  const elem = document.getElementById('SsafyHub_progress_elem');
   elem.className = 'markuploaded';
   const uploadedUrl = "https://github.com/" +
               Object.keys(branches)[0] + "/tree/" + 
@@ -58,7 +58,7 @@ function markUploadedCSS(branches, directory) {
  */
 function markUploadFailedCSS() {
   uploadState.uploading = false;
-  const elem = document.getElementById('BaekjoonHub_progress_elem');
+  const elem = document.getElementById('SsafyHub_progress_elem');
   elem.className = 'markuploadfailed';
 }
 

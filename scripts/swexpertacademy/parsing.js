@@ -91,7 +91,7 @@ async function makeData(origin) {
   const lang = (language === language.toUpperCase()) ? language.substring(0, 1) + language.substring(1).toLowerCase() : language
   const user = await getUser();
   const directory = await getDirNameByOrgOption(`${user}/SWEA/${level}/${problemId}. ${convertSingleCharToDoubleChar(title)}`, lang);
-  const message = `[${level}] Title: ${title}, Time: ${runtime}, Memory: ${memory} -BaekjoonHub`;
+  const message = `[${level}] Title: ${title}, Time: ${runtime}, Memory: ${memory} -SsafyHub`;
   const fileName = `${convertSingleCharToDoubleChar(title)}.${extension}`;
   const dateInfo = submissionTime ?? getDateString(new Date(Date.now()));
   // prettier-ignore

@@ -1,6 +1,6 @@
 /* Sync to local storage */
 chrome.storage.local.get('isSync', (data) => {
-  keys = ['BaekjoonHub_token', 'BaekjoonHub_username', 'pipe_baekjoonhub', 'stats', 'BaekjoonHub_hook', 'mode_type'];
+  keys = ['SsafyHub_token', 'SsafyHub_username', 'pipe_ssafyhub', 'stats', 'SsafyHub_hook', 'mode_type'];
   if (!data || !data.isSync) {
     keys.forEach((key) => {
       chrome.storage.sync.get(key, (data) => {
@@ -9,13 +9,13 @@ chrome.storage.local.get('isSync', (data) => {
     });
     chrome.storage.local.set({ isSync: true }, (data) => {
       // if (debug)
-      console.log('BaekjoonHub Synced to local values');
+      console.log('SsafyHub Synced to local values');
     });
   } else {
     // if (debug)
     // console.log('Upload Completed. Local Storage status:', data);
     // if (debug)
-    console.log('BaekjoonHub Local storage already synced!');
+    console.log('SsafyHub Local storage already synced!');
   }
 });
 
@@ -133,7 +133,7 @@ async function removeObjectFromSyncStorage(keys) {
 }
 
 async function getToken() {
-  return await getObjectFromLocalStorage('BaekjoonHub_token');
+  return await getObjectFromLocalStorage('SsafyHub_token');
 }
 
 // async function getPipe() {
@@ -141,7 +141,7 @@ async function getToken() {
 // }
 
 async function getGithubUsername() {
-  return await getObjectFromLocalStorage('BaekjoonHub_username');
+  return await getObjectFromLocalStorage('SsafyHub_username');
 }
 
 async function getStats() {
@@ -149,7 +149,7 @@ async function getStats() {
 }
 
 async function getHook() {
-  return await getObjectFromLocalStorage('BaekjoonHub_hook');
+  return await getObjectFromLocalStorage('SsafyHub_hook');
 }
 
 async function getUser() {
@@ -159,10 +159,10 @@ async function getUser() {
 /** welcome.html 의 분기 처리 dis_option에서 설정된 boolean 값을 반환합니다. */
 async function getOrgOption() {
   try {
-    return await getObjectFromLocalStorage('BaekjoonHub_OrgOption');
+    return await getObjectFromLocalStorage('SsafyHub_OrgOption');
   } catch (ex) {
     console.log('The way it works has changed with updates. Update your storage. ');
-    chrome.storage.local.set({ BaekjoonHub_OrgOption: "platform" }, () => {});
+    chrome.storage.local.set({ SsafyHub_OrgOption: "platform" }, () => {});
     return "platform";
   }
 }
@@ -172,7 +172,7 @@ async function getModeType() {
 }
 
 async function saveToken(token) {
-  return await saveObjectInLocalStorage({ BaekjoonHub_token: token });
+  return await saveObjectInLocalStorage({ SsafyHub_token: token });
 }
 
 async function saveStats(stats) {

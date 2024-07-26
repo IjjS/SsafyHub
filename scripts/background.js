@@ -11,20 +11,20 @@ function handleMessage(request, sender, sendResponse) {
   if (request && request.closeWebPage === true && request.isSuccess === true) {
     /* Set username */
     chrome.storage.local.set(
-      { BaekjoonHub_username: request.username } /* , () => {
+      { SsafyHub_username: request.username } /* , () => {
       window.localStorage.BaekjoonHub_username = request.username;
     } */,
     );
 
     /* Set token */
     chrome.storage.local.set(
-      { BaekjoonHub_token: request.token } /* , () => {
+      { SsafyHub_token: request.token } /* , () => {
       window.localStorage[request.KEY] = request.token;
     } */,
     );
 
     /* Close pipe */
-    chrome.storage.local.set({ pipe_BaekjoonHub: false }, () => {
+    chrome.storage.local.set({ pipe_ssafyhub: false }, () => {
       console.log('Closed pipe.');
     });
 

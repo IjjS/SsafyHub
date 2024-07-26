@@ -60,7 +60,7 @@ const statusCode = (res, status, name) => {
         document.getElementById('commit_mode').style.display = 'inherit';
       });
       /* Set Repo Hook */
-      chrome.storage.local.set({ BaekjoonHub_hook: res.full_name }, () => {
+      chrome.storage.local.set({ SsafyHub_hook: res.full_name }, () => {
         console.log('Successfully set new repo hook');
       });
 
@@ -74,7 +74,7 @@ const createRepo = (token, name) => {
     name,
     private: true,
     auto_init: true,
-    description: 'This is an auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).',
+    description: 'This is an auto push repository for Baekjoon Online Judge created with [SsafyHub](https://github.com/SsafyHub/SsafyHub).',
   };
   data = JSON.stringify(data);
 
@@ -102,19 +102,19 @@ const linkStatusCode = (status, name) => {
   switch (status) {
     case 301:
       $('#success').hide();
-      $('#error').html(`Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to BaekjoonHub. <br> This repository has been moved permenantly. Try creating a new one.`);
+      $('#error').html(`Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to SsafyHub. <br> This repository has been moved permenantly. Try creating a new one.`);
       $('#error').show();
       break;
 
     case 403:
       $('#success').hide();
-      $('#error').html(`Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to BaekjoonHub. <br> Forbidden action. Please make sure you have the right access to this repository.`);
+      $('#error').html(`Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to SsafyHub. <br> Forbidden action. Please make sure you have the right access to this repository.`);
       $('#error').show();
       break;
 
     case 404:
       $('#success').hide();
-      $('#error').html(`Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to BaekjoonHub. <br> Resource not found. Make sure you enter the right repository name.`);
+      $('#error').html(`Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to SsafyHub. <br> Resource not found. Make sure you enter the right repository name.`);
       $('#error').show();
       break;
 
@@ -149,10 +149,10 @@ const linkRepo = (token, name) => {
           // unable to gain access to repo in commit mode. Must switch to hook mode.
           /* Set mode type to hook */
           chrome.storage.local.set({ mode_type: 'hook' }, () => {
-            console.log(`Error linking ${name} to BaekjoonHub`);
+            console.log(`Error linking ${name} to SsafyHub`);
           });
           /* Set Repo Hook to NONE */
-          chrome.storage.local.set({ BaekjoonHub_hook: null }, () => {
+          chrome.storage.local.set({ SsafyHub_hook: null }, () => {
             console.log('Defaulted repo hook to NONE');
           });
 
@@ -164,12 +164,12 @@ const linkRepo = (token, name) => {
           document.getElementById('hook_mode').style.display = 'inherit';
           document.getElementById('commit_mode').style.display = 'none';
         } else {
-          chrome.storage.local.set({BaekjoonHub_username: org});
+          chrome.storage.local.set({SsafyHub_username: org});
           /* Change mode type to commit */
           /* Save repo url to chrome storage */
           chrome.storage.local.set({ mode_type: 'commit', repo: res.html_url }, () => {
             $('#error').hide();
-            $('#success').html(`Successfully linked <a target="blank" href="${res.html_url}">${repo}/${user}</a> to BaekjoonHub. Start <a href="https://www.acmicpc.net/">BOJ</a> now!`);
+            $('#success').html(`Successfully linked <a target="blank" href="${res.html_url}">${repo}/${user}</a> to SsafyHub. Start <a href="https://www.acmicpc.net/">BOJ</a> now!`);
             $('#success').show();
             $('#unlink').show();
           });
@@ -180,7 +180,7 @@ const linkRepo = (token, name) => {
           stats.submission = {};
           chrome.storage.local.set({ stats });
 
-          chrome.storage.local.set({ BaekjoonHub_hook: res.full_name }, () => {
+          chrome.storage.local.set({ SsafyHub_hook: res.full_name }, () => {
             console.log('Successfully set new repo hook');
             /* Get problems solved count */
             chrome.storage.local.get('stats', (psolved) => {
@@ -210,12 +210,12 @@ const unlinkRepo = () => {
     console.log(`Unlinking repo`);
   });
   /* Set Repo Hook to NONE */
-  chrome.storage.local.set({ BaekjoonHub_hook: null }, () => {
+  chrome.storage.local.set({ SsafyHub_hook: null }, () => {
     console.log('Defaulted repo hook to NONE');
   });
 
   /*프로그래밍 언어별 폴더 정리 옵션 세션 저장 초기화*/
-  chrome.storage.local.set({ BaekjoonHub_disOption: "platform" }, () => {
+  chrome.storage.local.set({ SsafyHub_disOption: "platform" }, () => {
     console.log('DisOption Reset');
   });
 
@@ -280,21 +280,21 @@ $('#hook_button').on('click', () => {
       - step 3: if (1), POST request to repoName (iff option = create new repo) ; else display error message.
       - step 4: if proceed from 3, hide hook_mode and display commit_mode (show stats e.g: files pushed/questions-solved/leaderboard)
     */
-    chrome.storage.local.get('BaekjoonHub_token', (data) => {
-      const token = data.BaekjoonHub_token;
+    chrome.storage.local.get('SsafyHub_token', (data) => {
+      const token = data.SsafyHub_token;
       if (token === null || token === undefined) {
         /* Not authorized yet. */
-        $('#error').text('Authorization error - Grant BaekjoonHub access to your GitHub account to continue (launch extension to proceed)');
+        $('#error').text('Authorization error - Grant SsafyHub access to your GitHub account to continue (launch extension to proceed)');
         $('#error').show();
         $('#success').hide();
       } else if (option() === 'new') {
         createRepo(token, repositoryName());
       } else {
-        chrome.storage.local.get('BaekjoonHub_username', (data2) => {
-          const username = data2.BaekjoonHub_username;
+        chrome.storage.local.get('SsafyHub_username', (data2) => {
+          const username = data2.SsafyHub_username;
           if (!username) {
             /* Improper authorization. */
-            $('#error').text('Improper Authorization error - Grant BaekjoonHub access to your GitHub account to continue (launch extension to proceed)');
+            $('#error').text('Improper Authorization error - Grant SsafyHub access to your GitHub account to continue (launch extension to proceed)');
             $('#error').show();
             $('#success').hide();
           } else {
@@ -307,7 +307,7 @@ $('#hook_button').on('click', () => {
 
   /*프로그래밍 언어별 폴더 정리 옵션 세션 저장*/
   let org_option = $('#org_option').val();
-  chrome.storage.local.set({ BaekjoonHub_OrgOption: org_option }, () => {
+  chrome.storage.local.set({ SsafyHub_OrgOption: org_option }, () => {
     console.log(`Set Organize by ${org_option}`);
   });
 });
@@ -324,11 +324,11 @@ chrome.storage.local.get('mode_type', (data) => {
 
   if (mode && mode === 'commit') {
     /* Check if still access to repo */
-    chrome.storage.local.get('BaekjoonHub_token', (data2) => {
-      const token = data2.BaekjoonHub_token;
+    chrome.storage.local.get('SsafyHub_token', (data2) => {
+      const token = data2.SsafyHub_token;
       if (token === null || token === undefined) {
         /* Not authorized yet. */
-        $('#error').text('Authorization error - Grant BaekjoonHub access to your GitHub account to continue (click BaekjoonHub extension on the top right to proceed)');
+        $('#error').text('Authorization error - Grant SsafyHub access to your GitHub account to continue (click SsafyHub extension on the top right to proceed)');
         $('#error').show();
         $('#success').hide();
         /* Hide accordingly */
@@ -336,11 +336,11 @@ chrome.storage.local.get('mode_type', (data) => {
         document.getElementById('commit_mode').style.display = 'none';
       } else {
         /* Get access to repo */
-        chrome.storage.local.get('BaekjoonHub_hook', (repoName) => {
-          const hook = repoName.BaekjoonHub_hook;
+        chrome.storage.local.get('SsafyHub_hook', (repoName) => {
+          const hook = repoName.SsafyHub_hook;
           if (!hook) {
             /* Not authorized yet. */
-            $('#error').text('Improper Authorization error - Grant BaekjoonHub access to your GitHub account to continue (click BaekjoonHub extension on the top right to proceed)');
+            $('#error').text('Improper Authorization error - Grant SsafyHub access to your GitHub account to continue (click SsafyHub extension on the top right to proceed)');
             $('#error').show();
             $('#success').hide();
             /* Hide accordingly */
