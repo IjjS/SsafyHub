@@ -1,8 +1,8 @@
-#BaekjoonHub_progress_anchor_element {
+#SsafyHub_progress_anchor_element {
   margin-right: 20px !important;
 }
 
-.BaekjoonHub_progress {
+.SsafyHub_progress {
   display: inline-block;
   pointer-events: none;
   width: 0.8em;
@@ -19,7 +19,7 @@
   }
 }
 
-#BaekjoonHub_progress_elem.markuploadfailed {
+#SsafyHub_progress_elem.markuploadfailed {
   display: inline-block;
   transform: rotate(45deg);
   height: 13px;
@@ -28,13 +28,13 @@
   border-right: 3px solid red;
 }
 
-#BaekjoonHub_progress_elem.markuploaded {
+#SsafyHub_progress_elem.markuploaded {
   display: inline-block;
   transform: rotate(45deg);
   height: 13px;
   width: 5px;
-  border-bottom: 3px solid #78b13f;
-  border-right: 3px solid #78b13f;
+  border-bottom: 3px solid #3c78af;
+  border-right: 3px solid #3c78af;
 }
 
 .BJH_button_wrap {
