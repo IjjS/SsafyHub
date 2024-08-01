@@ -138,6 +138,13 @@ const linkRepo = (token, name) => {
   const user = name.split("/")[2];
   const AUTHENTICATION_URL = `https://api.github.com/repos/${repo}`;
 
+  if (user === undefined || user === null || user === '' || user === ' ') {
+    $('#success').hide();
+    $('#error').text('Error linking to SsafyHub - Please make sure you enter the correct user name. EX: algorithms/김싸피');
+    $('#error').show();
+    return;
+  }
+
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('readystatechange', function() {
     if (xhr.readyState === 4) {
